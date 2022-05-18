@@ -30,7 +30,7 @@ func (LikeDao) GetVideoIdListByUserId(userId int64) ([]int64, error) {
 	var likes []model.Like
 	var videoIdList []int64
 
-	find := global.GVA_DB.Debug().Select("video_id").Where("user_id = ?", userId).Find(&likes)
+	find := global.GVA_DB.Debug().Select("video_id").Where("user_id = ?", userId).Order("update_at desc").Find(&likes)
 	if find.Error != nil {
 		return videoIdList, find.Error
 	}
